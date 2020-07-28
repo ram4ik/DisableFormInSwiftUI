@@ -8,8 +8,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var username = ""
+    @State private var password = ""
+    
+    private var disable: Bool {
+        username.count < 5 || password.count < 5
+    }
+    
     var body: some View {
-        Text("Hello, world!").padding()
+        NavigationView {
+            Form {
+                Section {
+                    TextField("Username", text: $username)
+                    TextField("Password", text: $password)
+                }
+                
+                Section {
+                    Button("LOGIN") {
+                        print("Loggin passed")
+                    }.disabled(disable)
+                }
+            }.navigationTitle("Disabled Form")
+        }
     }
 }
 
